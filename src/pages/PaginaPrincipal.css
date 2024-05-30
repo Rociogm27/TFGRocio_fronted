@@ -1,0 +1,82 @@
+/* paginaPrincipal.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background-color: #a4d4ae;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagina-principal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 70px; /* Espacio para el navbar fijo */
+}
+
+.contenido {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.botones {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.boton-toggle {
+  background-color: #a4d4ae;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.boton-toggle.activo {
+  background-color: #87c38f;
+  color: white;
+}
+
+.boton-toggle:hover {
+  background-color: #87c38f;
+}
+
+.cuenta-principal,
+.totales,
+.filtros,
+.fecha,
+.detalle {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.filtros a {
+  margin: 0 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.filtros a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .botones {
+    flex-direction: column;
+  }
+
+  .boton-toggle {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}
