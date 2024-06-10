@@ -35,7 +35,7 @@ const CompRegistro = () => {
             });
             setSuccess('Usuario creado exitosamente');
             setError(null);
-         //   navigate(`/`); 
+            navigate(`/`); 
         } else if (existeCorreo !== undefined) {
             setError('Correo electrónico ya registrado');
             setSuccess(null);

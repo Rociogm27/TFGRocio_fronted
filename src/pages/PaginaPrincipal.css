@@ -1,82 +1,66 @@
-/* paginaPrincipal.css */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
-
-.navbar {
-  background-color: #a4d4ae;
-  color: white;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
 .pagina-principal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 70px; /* Espacio para el navbar fijo */
+  min-height: 100vh;
+  padding-top: 18%; /* Ajusta este valor según la altura del Navbar */
 }
 
-.contenido {
-  width: 90%;
-  max-width: 1200px;
-  margin: 20px auto;
+.cuenta-select {
+}
+
+
+.detalle {
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+  border-radius: 10px; /* Esquinas curvadas */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .botones {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .boton-toggle {
-  background-color: #a4d4ae;
-  border: none;
-  padding: 10px 20px;
-  margin: 0 10px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-}
-
-.boton-toggle.activo {
-  background-color: #87c38f;
-  color: white;
+  transition: background-color 0.3s ease;
 }
 
 .boton-toggle:hover {
-  background-color: #87c38f;
+  background-color: #a9a7a7;
 }
 
-.cuenta-principal,
-.totales,
-.filtros,
-.fecha,
-.detalle {
-  margin-bottom: 20px;
+.boton-toggle.activo {
+  background-color: #4CAF50; /* Color verde para el botón activo */
+  color: white;
+}
+
+.sin-cuentas {
   text-align: center;
 }
 
-.filtros a {
-  margin: 0 10px;
-  color: #333;
-  text-decoration: none;
+.sin-cuentas p {
+  font-size: 20px;
+  margin-bottom: 20px;
 }
 
-.filtros a:hover {
-  text-decoration: underline;
+.sin-cuentas button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .botones {
-    flex-direction: column;
-  }
-
-  .boton-toggle {
-    margin-bottom: 10px;
-    width: 100%;
-  }
+.sin-cuentas button:hover {
+  background-color: #45a049;
 }

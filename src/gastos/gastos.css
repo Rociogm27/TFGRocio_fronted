@@ -1,0 +1,30 @@
+.gastos {
+  margin: 20px;
+}
+
+.gastos-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 4%;
+
+}
+
+.gastos-list {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.gasto {
+  background-color: #acdab0;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.grafica {
+  flex: 0 0 400px;
+  display: flex;
+  justify-content: center;
+}

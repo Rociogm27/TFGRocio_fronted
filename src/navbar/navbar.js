@@ -21,13 +21,13 @@ function NavbarPersonalizado(props) {
           <Nav className="me-auto">
             <Nav.Link href={`/${props.idUser}`} className='navbar-link'>Inicio</Nav.Link>
             <Nav.Link href={`/${props.idUser}/cuentas`} className='navbar-link'>Cuentas</Nav.Link>
-            <Nav.Link href="/graficos" className='navbar-link'>Gráficos</Nav.Link>
-            <Nav.Link href="/notificaciones" className='navbar-link'>Notificaciones</Nav.Link>
-            <Nav.Link href="/sugerencias" className='navbar-link'>Sugerencias</Nav.Link>
+            <Nav.Link href={`/${props.idUser}/graficos`} className='navbar-link'>Gráficos</Nav.Link>
+            <Nav.Link href={`/${props.idUser}/notificaciones`} className='navbar-link'>Notificaciones</Nav.Link>
+            <Nav.Link href={`/${props.idUser}/sugerencias`} className='navbar-link'>Sugerencias</Nav.Link>
           </Nav>
           <Nav>
             <span className="navbar-text me-3">{props.email}</span>
-            <Nav.Link href="/perfil" className='navbar-link'>Mi Perfil</Nav.Link>
+            <Nav.Link href={`/${props.idUser}/perfil`} className='navbar-link'>Mi Perfil</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
