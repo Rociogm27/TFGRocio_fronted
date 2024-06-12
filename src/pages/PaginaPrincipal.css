@@ -1,11 +1,33 @@
 .pagina-principal {
   min-height: 100vh;
-  padding-top: 18%; /* Ajusta este valor según la altura del Navbar */
+  padding-top: 80px; /* Ajusta este valor según la altura del Navbar */
 }
 
 .cuenta-select {
+  margin-bottom: 20px;
 }
 
+.custom-dropdown .dropdown-toggle {
+  background-color: #257d28; /* Color verde */
+  border-color: #4CAF50;
+  color: rgb(255, 255, 255);
+  
+}
+
+.custom-dropdown .dropdown-menu {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-dropdown .dropdown-item {
+  color: #333;
+}
+
+.custom-dropdown .dropdown-item:hover,
+.custom-dropdown .dropdown-item:focus {
+  background-color: #f1f1f1;
+}
 
 .detalle {
   width: 100%;

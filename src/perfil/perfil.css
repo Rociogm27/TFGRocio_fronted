@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.perfil-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding-top: 80px; /* Ajusta el padding-top para dejar espacio para el Navbar */
+}
+
+.perfil-box {
+    background-color: #acdab0;
+    padding: 5%;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+.perfil-info {
+    margin-top: 20px;
+}
+
+.perfil-card {
+    background-color: #ffffff;
+    border: none;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.perfil-card-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.perfil-card-text {
+    font-size: 16px;
+    color: #666;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: green;
+    margin-top: 10px;
+}
+
+h1 {
+    color: #000000;
+    font-size: 2em;
+}
+
+button {
+    width: 100%;
+    font-size: 1em;
+    padding: 10px;
+}

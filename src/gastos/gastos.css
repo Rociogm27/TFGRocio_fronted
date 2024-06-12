@@ -2,12 +2,25 @@
   margin: 20px;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-gasto-button {
+  font-size: 25px;
+  padding: 12px;
+  line-height: 1;
+  width: 10%;
+
+}
+
 .gastos-content {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 4%;
-
 }
 
 .gastos-list {

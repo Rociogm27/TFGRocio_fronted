@@ -1,0 +1,49 @@
+.pagina-cuentas {
+    min-height: 100vh;
+    padding-top: 80px; /* Ajusta este valor según la altura del Navbar */
+  }
+  
+  .cuentas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .cuentas-header h1 {
+    margin: 0;
+  }
+  
+  .add-cuenta-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-cuenta-button:hover {
+    background-color: #45a049;
+  }
+  
+  .cuenta-card {
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+    border-radius: 10px; /* Esquinas curvadas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cuenta-card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .cuenta-card-text {
+    font-size: 18px;
+  }
+  

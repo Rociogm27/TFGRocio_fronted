@@ -2,6 +2,19 @@
   margin: 20px;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-ingreso-button {
+  font-size: 25px;
+  padding: 12px;
+  line-height: 1;
+  width: 10%;
+}
+
 .ingresos-content {
   display: flex;
   justify-content: space-between;
