@@ -18,11 +18,11 @@
     background-color: #4CAF50;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+    font-size: 25px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 15%;
   }
   
   .add-cuenta-button:hover {

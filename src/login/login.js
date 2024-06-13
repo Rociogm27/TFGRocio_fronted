@@ -16,16 +16,24 @@ const Login = () => {
   async function inicioSesion(e) {
     e.preventDefault();
 
-    axios.get(URIuser)
-      .then(response => {
-        const usuarios = response.data;
-        const usuarioEncontrado = usuarios.find(usuario => usuario.email === user && usuario.contrasena === password);
-        if (usuarioEncontrado !== undefined) {
-          navigate(`/${usuarioEncontrado.id}`);
+    try {
+      const response = await axios.get(URIuser);
+      const usuarios = response.data;
+      const usuarioEncontrado = usuarios.find(usuario => usuario.email === user && usuario.contrasena === password);
+
+      if (usuarioEncontrado !== undefined) {
+        if (usuarioEncontrado.admin === 1) {
+          navigate(`/${usuarioEncontrado.id}/administrador`);
         } else {
-          setError('Email o contraseña incorrecta.');
+          navigate(`/${usuarioEncontrado.id}`);
         }
-      });
+      } else {
+        setError('Email o contraseña incorrecta.');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      setError('Hubo un error al iniciar sesión.');
+    }
   }
 
   return (

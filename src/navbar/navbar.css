@@ -1,0 +1,34 @@
+/* navbar.css */
+
+body {
+    margin: 0;
+    padding-top: 60px; /* Altura del navbar para evitar que tape el contenido */
+    font-family: Arial, sans-serif;
+}
+
+.navbar-personalizado {
+    background-color: #a4d4ae;
+    width: 100%;
+}
+
+.navbar-link, .navbar-perfil {
+    color: #000000;
+    font-size:medium;
+    font-weight: bold;
+}
+
+.navbar-link:hover, .navbar-perfil:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.navbar-text {
+    color: #000000;
+    font-weight: bold;
+}
+
+.brand-text {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #000000;
+}

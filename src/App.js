@@ -9,6 +9,8 @@ import NuevaCuenta from "./cuentas/nuevaCuenta"
 import NuevoIngreso  from './ingresos/nuevoIngreso';
 import NuevoGasto from './gastos/nuevoGasto';
 import Perfil from './perfil/perfil';
+import Graficos from './graficas/graficas'
+import Administrador from './administrador/administrador'
 
 function App() {
   return (
@@ -23,6 +25,10 @@ function App() {
           <Route path="/:idUser/nuevoIngreso/:idCuenta" element={<NuevoIngreso/>}/>
           <Route path="/:idUser/nuevoGasto/:idCuenta" element={<NuevoGasto/>}/>
           <Route path="/:idUser/perfil" element={<Perfil/>}/> 
+          <Route path="/:idUser/graficos" element={<Graficos/>}/> 
+          <Route path="/:idUser/notificaciones" element={<Graficos/>}/> 
+          <Route path="/:idUser/administrador" element={<Administrador/>}/>
+
 
         </Routes>
       </BrowserRouter>

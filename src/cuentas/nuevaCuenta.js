@@ -62,6 +62,11 @@ const NuevaCuenta = () => {
       <NavbarPer idUser={idUser} />
       <div className="nuevaCuenta-box">
         <h1>Crear Nueva Cuenta</h1>
+        <span className="flex items-center">
+      <span className="h-px flex-1 bg-black"></span>
+      <span className="shrink-0 px-6">___________________________________________________________________________________</span>
+      <span className="h-px flex-1 bg-black"></span>
+      </span>
         <form className="nuevaCuenta-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="nombre">Nombre de la Cuenta</label>

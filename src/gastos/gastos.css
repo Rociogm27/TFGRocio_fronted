@@ -41,3 +41,11 @@
   display: flex;
   justify-content: center;
 }
+.delete-gasto-button {
+  color: #6c757d;
+  width: 20%;
+}
+
+.delete-gasto-button:hover {
+  color: #dc3545;
+}

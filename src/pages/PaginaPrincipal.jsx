@@ -65,10 +65,21 @@ function PaginaPrincipal() {
     navigate(`/${idUser}/nuevaCuenta`);
   };
 
+/*
+boton del select anterior
+                  title={selectedCuentaNombre ? `Cuenta: ${selectedCuentaNombre}` : "Seleccionar cuenta"}
+
+*/
+
   return (
-    <Container fluid className="pagina-principal">
-      <NavbarPer idUser={idUser} />
-      <Container>
+    <div>
+       <div className="row">
+        <div className="col-12">
+          <NavbarPer className="navbar-per" idUser={idUser} />
+          </div>
+          </div>
+        <Container  fluid className="pagina-principal ">
+       
         {cuentas.length === 0 ? (
           <Row className="justify-content-center mt-5">
             <Col md={12} className="text-center">
@@ -82,7 +93,7 @@ function PaginaPrincipal() {
               <Col xs={12} md={3} className="d-flex justify-content-start align-items-center">
                 <DropdownButton
                   id="dropdown-basic-button"
-                  title={selectedCuentaNombre ? `Cuenta: ${selectedCuentaNombre}` : "Seleccionar cuenta"}
+                  title={selectedCuentaNombre ? `Cambiar cuenta` : "Seleccionar cuenta"}
                   variant="success" // Cambiar el variant a 'success'
                   className="custom-dropdown" // Añadir clase personalizada
                 >
@@ -121,8 +132,12 @@ function PaginaPrincipal() {
                 </Button>
               </Col>
             </Row>
-
-            <Row className="justify-content-center mt-3">
+            <span className="flex items-center">
+            <span className="h-px flex-1 bg-black"></span>
+            <span className="shrink-0 px-6">___________________________________________________________________________________</span>
+            <span className="h-px flex-1 bg-black"></span>
+            </span>
+            <Row className="justify-content-center mt-3 mb-5">
               <Col xs={12}>
                 <div className="detalle">
                   {selectedCuentaId ? (mostrarGastos ? <PagGastos selectedCuentaId={selectedCuentaId} /> : <PagIngresos selectedCuentaId={selectedCuentaId} />) : null}
@@ -132,7 +147,8 @@ function PaginaPrincipal() {
           </>
         )}
       </Container>
-    </Container>
+
+    </div>
   );
 }
 

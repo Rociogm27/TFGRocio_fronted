@@ -40,3 +40,12 @@
   display: flex;
   justify-content: center;
 }
+
+.delete-ingreso-button {
+  color: #6c757d;
+  width: 20%;
+}
+
+.delete-ingreso-button:hover {
+  color: #dc3545;
+}

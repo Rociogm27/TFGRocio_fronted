@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PieChart, Pie, Tooltip, Cell } from 'recharts';
-import { Button } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { FaTrash } from 'react-icons/fa';
 import './gastos.css';
 
 const URIgastosCuenta = 'http://localhost:8000/gastos/cuenta/';
 const URICuentaDetalle = 'http://localhost:8000/cuentas/';
+const URIGasto = 'http://localhost:8000/gastos/';
 
 const Gastos = (props) => {
   const [gastos, setGastos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [usuarioId, setUsuarioId] = useState(null); // New state for user ID
+  const [showModal, setShowModal] = useState(false);
+  const [gastoToDelete, setGastoToDelete] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +51,32 @@ const Gastos = (props) => {
     }
   };
 
+  const handleShowModal = (gasto) => {
+    setGastoToDelete(gasto);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setGastoToDelete(null);
+    setShowModal(false);
+  };
+
+  const handleDeleteGasto = async () => {
+    try {
+      if (!gastoToDelete) return;
+
+      // Borrar el gasto
+      await axios.delete(`${URIGasto}${gastoToDelete.id}`);
+
+      // Actualizar la lista de gastos
+      setGastos(gastos.filter(gasto => gasto.id !== gastoToDelete.id));
+
+      handleCloseModal();
+    } catch (error) {
+      console.error('Error deleting gasto:', error);
+    }
+  };
+
   return (
     <div className="gastos">
       <div className="header">
@@ -61,8 +91,18 @@ const Gastos = (props) => {
             {gastos.length > 0 ? (
               gastos.map((gasto, index) => (
                 <div key={index} className="gasto">
-                  <p>{`Descripción: ${gasto.descripcion}`}</p>
-                  <p>{`Cantidad: ${gasto.cantidad}`}</p>
+                  <div className="gasto-details">
+                    <p><b>Descripción: </b>{`${gasto.descripcion}`}</p>
+                    <p><b>Cantidad: </b>{`${gasto.cantidad}`}</p>
+                    <p><b>Fecha: </b>{`${gasto.fecha}`}</p>
+                  </div>
+                  <Button
+                    variant="light"
+                    className="delete-gasto-button"
+                    onClick={() => handleShowModal(gasto)}
+                  >
+                    <FaTrash />
+                  </Button>
                 </div>
               ))
             ) : (
@@ -92,6 +132,24 @@ const Gastos = (props) => {
           )}
         </div>
       )}
+
+      {/* Modal de confirmación */}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar Borrado</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          ¿Seguro que quieres borrar el gasto de "{gastoToDelete?.descripcion}"?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={handleDeleteGasto}>
+            Borrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

@@ -13,6 +13,8 @@ const NuevoIngreso = () => {
   const [descripcion, setDescripcion] = useState('');
   const [cantidad, setCantidad] = useState('');
   const [fecha, setFecha] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [esFijo, setEsFijo] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
@@ -31,17 +33,36 @@ const NuevoIngreso = () => {
         cuenta_id: idCuenta,
         fecha: fecha,
         cantidad: cantidad,
-        descripcion: descripcion
+        descripcion: descripcion,
+        categoria: categoria,
+        es_fijo: esFijo ? 1 : 0
       };
 
       console.log(nuevoIngreso);
 
       await axios.post(URICrearIngreso, nuevoIngreso);
+
+      // Obtener detalles de la cuenta
+      const responseCuenta = await axios.get(`${URICuentaDetalle}${idCuenta}`);
+      const cuenta = responseCuenta.data;
+
+      // Actualizar saldo_actual
+      const nuevoSaldo = parseFloat(cuenta.saldo_actual) + parseFloat(cantidad);
+      const cuentaActualizada = {
+        saldo_actual: nuevoSaldo
+      };
+
+      console.log(cuentaActualizada);
+
+      await axios.put(`${URICuentaDetalle}${idCuenta}`, cuentaActualizada);
+
       setSuccess('Ingreso creado con éxito.');
       setError(null);
       setDescripcion('');
       setCantidad('');
       setFecha('');
+      setCategoria('');
+      setEsFijo(false);
       navigate(`/${idUser}`);
     } catch (error) {
       console.error('Error creating ingreso:', error);
@@ -63,9 +84,26 @@ const NuevoIngreso = () => {
               value={descripcion}
               onChange={(e) => setDescripcion(e.target.value)}
               type="text"
+              placeholder="Descripción del ingreso"
               className="form-control"
               required
             />
+          </div>
+          <div className="form-group">
+            <label htmlFor="categoria">Categoría</label>
+            <select
+              name="categoria"
+              value={categoria}
+              onChange={(e) => setCategoria(e.target.value)}
+              className="form-control"
+            >
+              <option value="">Seleccione una categoría</option>
+              <option value="Salario">Salario</option>
+              <option value="Regalo">Regalo</option>
+              <option value="Interés">Interés</option>
+              <option value="Inversión">Inversión</option>
+              <option value="Otro">Otro</option>
+            </select>
           </div>
           <div className="form-group">
             <label htmlFor="cantidad">Cantidad</label>
@@ -87,6 +125,16 @@ const NuevoIngreso = () => {
               type="date"
               className="form-control"
               required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="esFijo">Es ingreso fijo</label>
+            <input
+              name="esFijo"
+              checked={esFijo}
+              onChange={(e) => setEsFijo(e.target.checked)}
+              type="checkbox"
+              className="form-check-input"
             />
           </div>
           {error && (
