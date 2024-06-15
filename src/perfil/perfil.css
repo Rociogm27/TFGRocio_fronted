@@ -8,22 +8,24 @@ body {
 }
 
 .perfil-container {
-    display: flex;
+    display: inline;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 80%;
     width: 100%;
-    padding-top: 80px; /* Ajusta el padding-top para dejar espacio para el Navbar */
+    padding-top: 5%; /* Ajusta el padding-top para dejar espacio para el Navbar */
 }
 
 .perfil-box {
     background-color: #acdab0;
-    padding: 5%;
+    padding: 2%;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 90%;
     max-width: 400px;
+    margin-bottom: 2%;
+    margin-top: 2%;
 }
 
 .perfil-info {

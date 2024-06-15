@@ -8,20 +8,21 @@ body {
   }
   
   .nuevaCuenta-container {
-    display: flex;
-    
+    display: inline;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 100%;
+    width: 60%;
   }
   
 .nuevaCuenta-box{
-
+margin-top: 5%;
+width: 50%;
+margin-left: 25%;
 }
   
   .nuevaCuenta-form {
-    margin-top: 20px;
+    margin-top: 5%;
     
   }
   

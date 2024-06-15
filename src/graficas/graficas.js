@@ -33,7 +33,6 @@ const Graficos = () => {
                     const primeraCuenta = cuentasData[0];
                     setSelectedCuentaId(primeraCuenta.id);
                     setSelectedCuentaNombre(primeraCuenta.nombre);
-                    fetchGastosEIngresos(primeraCuenta.id, filtro);
                 }
             } catch (error) {
                 console.error('Error fetching cuentas:', error);
@@ -48,12 +47,6 @@ const Graficos = () => {
         }
     }, [selectedCuentaId, filtro]);
 
-    useEffect(() => {
-        if (data.length > 0) {
-            generateChart();
-        }
-    }, [data]);
-
     const fetchGastosEIngresos = async (cuentaId, filtro) => {
         try {
             const gastosResponse = await axios.get(`${URIGastosCuenta}${cuentaId}`);
@@ -64,6 +57,9 @@ const Graficos = () => {
             setIngresos(filteredIngresos);
             const combinedData = combineData(filteredGastos, filteredIngresos);
             setData(combinedData);
+            generateChart(combinedData);
+            generatePieChart(filteredGastos, 'gastos');
+            generatePieChart(filteredIngresos, 'ingresos');
         } catch (error) {
             console.error('Error fetching gastos o ingresos:', error);
         }
@@ -122,13 +118,13 @@ const Graficos = () => {
         setFiltro(filtro);
     };
 
-    const generateChart = () => {
+    const generateChart = (combinedData) => {
         const chartData = {
             x: 'x',
             columns: [
-                ['x', ...data.map(item => item.fecha)],
-                ['Gastos', ...data.map(item => item.gasto)],
-                ['Ingresos', ...data.map(item => item.ingreso)]
+                ['x', ...combinedData.map(item => item.fecha)],
+                ['Gastos', ...combinedData.map(item => item.gasto)],
+                ['Ingresos', ...combinedData.map(item => item.ingreso)]
             ],
             types: {
                 Gastos: 'bar',
@@ -141,7 +137,7 @@ const Graficos = () => {
         };
 
         c3.generate({
-            bindto: '#chart',
+            bindto: '#barChart',
             data: chartData,
             axis: {
                 x: {
@@ -151,12 +147,34 @@ const Graficos = () => {
         });
     };
 
+    const generatePieChart = (data, type) => {
+        const chartData = {
+            columns: [],
+            type: 'pie',
+            colors: {
+                Gastos: '#FFBB28',
+                Ingresos: '#4CAF50'
+            }
+        };
+
+        if (type === 'gastos') {
+            chartData.columns = data.map(gasto => [gasto.descripcion, gasto.cantidad]);
+        } else {
+            chartData.columns = data.map(ingreso => [ingreso.descripcion, ingreso.cantidad]);
+        }
+
+        c3.generate({
+            bindto: type === 'gastos' ? '#gastosChart' : '#ingresosChart',
+            data: chartData
+        });
+    };
+
     return (
         <div>
             <NavbarPer idUser={idUser} />
             <Container fluid className="pagina-graficos mt-5">
-                <Container className="contenido-graficos p-4 shadow">
-                    <Row className="align-items-center mt-3 cuenta-select">
+                <Container className="contenido-graficos p-4 shadow-lg">
+                    <Row className="align-items-center cuenta-select">
                         <Col xs={12} md={4} className="d-flex justify-content-start align-items-center">
                             <DropdownButton
                                 id="dropdown-basic-button"
@@ -201,8 +219,16 @@ const Graficos = () => {
                         </Row>
                     ) : (
                         <Row className="justify-content-center mt-5">
-                            <Col xs={12} md={12}>
-                                <div id="chart"></div>
+                            <Col xs={12} md={4}>
+                                <h5 className="text-center">Gastos</h5>
+                                <div id="gastosChart" className="chart-container"></div>
+                            </Col>
+                            <Col xs={12} md={4}>
+                                <div id="barChart" className="chart-container"></div>
+                            </Col>
+                            <Col xs={12} md={4}>
+                                <h5 className="text-center">Ingresos</h5>
+                                <div id="ingresosChart" className="chart-container"></div>
                             </Col>
                         </Row>
                     )}

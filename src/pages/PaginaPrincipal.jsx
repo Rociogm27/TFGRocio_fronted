@@ -134,7 +134,7 @@ boton del select anterior
             </Row>
             <span className="flex items-center">
             <span className="h-px flex-1 bg-black"></span>
-            <span className="shrink-0 px-6">___________________________________________________________________________________</span>
+            <span className="shrink-0 px-6">__________________________________________________________________________________________________________________________________________________________</span>
             <span className="h-px flex-1 bg-black"></span>
             </span>
             <Row className="justify-content-center mt-3 mb-5">

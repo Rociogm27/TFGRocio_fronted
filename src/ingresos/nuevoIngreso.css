@@ -11,18 +11,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 70%;
     width: 100%;
 }
 
 .nuevoIngreso-box {
     background-color: #acdab0;
-    padding: 40px;
+    padding: 3%;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 100%;
-    max-width: 400px;
+    width: 80%;
+    max-width: 35%;
 }
 
 .nuevoIngreso-form {

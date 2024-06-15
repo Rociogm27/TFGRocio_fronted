@@ -1,6 +1,6 @@
 .pagina-cuentas {
     min-height: 100vh;
-    padding-top: 80px; /* Ajusta este valor según la altura del Navbar */
+    padding-top: 2%; /* Ajusta este valor según la altura del Navbar */
   }
   
   .cuentas-header {
@@ -30,12 +30,13 @@
   }
   
   .cuenta-card {
-    width: 100%;
+    width: 60%;
     margin-top: 20px;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
     border-radius: 10px; /* Esquinas curvadas */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 20%;
   }
   
   .cuenta-card-title {

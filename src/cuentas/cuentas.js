@@ -83,11 +83,9 @@ const Cuentas = ({ idUser }) => {
           <Button className="add-cuenta-button" onClick={handleAddCuenta}>+</Button>
         </Col>
       </Row>
-      <span className="flex items-center">
-      <span className="h-px flex-1 bg-black"></span>
-      <span className="shrink-0 px-6">___________________________________________________________________________________</span>
-      <span className="h-px flex-1 bg-black"></span>
-      </span>
+
+            <div class="linea"></div>
+
       <Row>
         {cuentas.length > 0 ? (
           cuentas.map((cuenta) => (

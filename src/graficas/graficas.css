@@ -1,12 +1,11 @@
 /* Graficos.css */
 
 body {
-    display: flex;
+    display:inline;
     margin: 0;
 }
 
 .pagina-graficos {
-    padding-top: 60px; /* Ajustar según la altura de tu navbar */
     min-height: 100vh;
 }
 

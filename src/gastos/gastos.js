@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { PieChart, Pie, Tooltip, Cell } from 'recharts';
 import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FaTrash } from 'react-icons/fa';
+import c3 from 'c3';
+import 'c3/c3.css';
 import './gastos.css';
 
 const URIgastosCuenta = 'http://localhost:8000/gastos/cuenta/';
@@ -43,7 +44,11 @@ const Gastos = (props) => {
     fetchCuentaDetalle();
   }, [props.selectedCuentaId]);
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
+  useEffect(() => {
+    if (gastos.length > 0) {
+      generateDonutChart();
+    }
+  }, [gastos]);
 
   const handleAddGasto = () => {
     if (usuarioId) {
@@ -75,6 +80,21 @@ const Gastos = (props) => {
     } catch (error) {
       console.error('Error deleting gasto:', error);
     }
+  };
+
+  const generateDonutChart = () => {
+    const chartData = gastos.map(gasto => [gasto.descripcion, gasto.cantidad]);
+
+    c3.generate({
+      bindto: '#donutChart',
+      data: {
+        columns: chartData,
+        type: 'donut'
+      },
+      donut: {
+        title: "Gastos"
+      }
+    });
   };
 
   return (
@@ -111,23 +131,7 @@ const Gastos = (props) => {
           </div>
           {gastos.length > 0 && (
             <div className="grafica">
-              <PieChart width={400} height={400}>
-                <Pie
-                  data={gastos}
-                  dataKey="cantidad"
-                  cx={200}
-                  cy={200}
-                  innerRadius={60}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  label
-                >
-                  {gastos.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
+              <div id="donutChart"></div>
             </div>
           )}
         </div>

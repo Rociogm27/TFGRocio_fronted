@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+//const jwt = require('jsonwebtoken');
 
 import './login.css'; // Archivo CSS para estilos personalizados
 
@@ -22,6 +23,7 @@ const Login = () => {
       const usuarioEncontrado = usuarios.find(usuario => usuario.email === user && usuario.contrasena === password);
 
       if (usuarioEncontrado !== undefined) {
+
         if (usuarioEncontrado.admin === 1) {
           navigate(`/${usuarioEncontrado.id}/administrador`);
         } else {
