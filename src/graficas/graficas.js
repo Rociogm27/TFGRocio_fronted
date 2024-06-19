@@ -172,7 +172,8 @@ const Graficos = () => {
     return (
         <div>
             <NavbarPer idUser={idUser} />
-            <Container fluid className="pagina-graficos mt-5">
+            <Container fluid className="pagina-graficos mt-2">
+        <h1>Gráficos</h1>
                 <Container className="contenido-graficos p-4 shadow-lg">
                     <Row className="align-items-center cuenta-select">
                         <Col xs={12} md={4} className="d-flex justify-content-start align-items-center">

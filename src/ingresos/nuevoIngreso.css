@@ -1,61 +1,62 @@
 body {
     margin: 0;
     font-family: 'Helvetica Neue', sans-serif;
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
 .nuevoIngreso-container {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
-    height: 70%;
     width: 100%;
+    padding: 20px;
 }
 
 .nuevoIngreso-box {
     background-color: #acdab0;
-    padding: 3%;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 80%;
-    max-width: 35%;
+    width: 90%;
+    max-width: 400px;
 }
 
 .nuevoIngreso-form {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: left;
 }
 
 .form-group label {
     font-weight: bold;
     color: #333;
+    font-size: 14px;
 }
 
 .form-control {
     width: 100%;
-    padding: 12px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-top: 8px;
+    margin-top: 5px;
+    font-size: 14px;
 }
 
 .nuevoIngreso-button {
     background-color: #4CAF50;
     color: white;
-    padding: 12px;
+    padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .nuevoIngreso-button:hover {
@@ -65,13 +66,16 @@ body {
 .error-message {
     color: red;
     margin-top: 10px;
+    font-size: 14px;
 }
 
 .success-message {
     color: green;
     margin-top: 10px;
+    font-size: 14px;
 }
 
 h1 {
     color: #000000;
+    font-size: 20px;
 }

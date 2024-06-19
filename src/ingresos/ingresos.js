@@ -112,6 +112,7 @@ const Ingresos = (props) => {
               ingresos.map((ingreso, index) => (
                 <div key={index} className="ingreso">
                   <div className="ingreso-details">
+                  <p><b>Categoria: </b>{`${ingreso.categoria}`}</p>
                     <p><b>Descripción: </b>{`${ingreso.descripcion}`}</p>
                     <p><b>Cantidad: </b>{`${ingreso.cantidad}`}</p>
                     <p><b>Fecha: </b>{`${ingreso.fecha}`}</p>

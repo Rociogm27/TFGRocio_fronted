@@ -1,26 +1,53 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to right, #56ab2f, #a8e063);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
 .login-container {
+  display:flex;
+  width: 65%;
+  background-color: #a4d4ae;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left: 16%;
+}
+
+.left-section {
+  flex: 1;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px 0 0 8px;
+
+}
+
+.left-section img {
+  width: 70%;
+  margin-bottom: 20px;
+  border-radius: 50%; /* Hace que la imagen sea circular */
+  object-fit: cover; /* Asegura que la imagen cubra completamente el contenedor circular */
+  
+}
+
+.left-section h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  
+}
+
+.left-section p {
+  font-size: 1em;
+  text-align: center;
+  width: 80%;
+}
+
+.right-section {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100%;
 }
 
 .login-box {
-  background: rgba(255, 255, 255, 0.8);
-  padding: 20px 40px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 2%;
   text-align: center;
   width: 100%;
   max-width: 400px;

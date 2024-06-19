@@ -41,6 +41,9 @@ const Administradores = () => {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('token');  // Elimina el token del almacenamiento local+
+    localStorage.removeItem('idUser');  // Elimina el user del almacenamiento local
+
     navigate('/');
   };
 

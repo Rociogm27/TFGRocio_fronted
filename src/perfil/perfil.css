@@ -1,51 +1,48 @@
 body {
     margin: 0;
     font-family: 'Helvetica Neue', sans-serif;
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .perfil-container {
-    display: inline;
     justify-content: center;
     align-items: center;
-    height: 80%;
+    height: 100vh;
     width: 100%;
-    padding-top: 5%; /* Ajusta el padding-top para dejar espacio para el Navbar */
+    margin-bottom: 1%;
+    margin-top: 1%;
 }
 
 .perfil-box {
     background-color: #acdab0;
-    padding: 2%;
+    padding: 20px; /* Reducido */
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 90%;
-    max-width: 400px;
-    margin-bottom: 2%;
-    margin-top: 2%;
+    max-width: 350px; /* Reducido */
 }
 
 .perfil-info {
-    margin-top: 20px;
+    margin-top: 10px; /* Reducido */
 }
 
 .perfil-card {
     background-color: #ffffff;
     border: none;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reducido */
     width: 100%;
 }
 
 .perfil-card-title {
     font-weight: bold;
     color: #333;
+    font-size: 1.2em; /* Reducido */
 }
 
 .perfil-card-text {
-    font-size: 16px;
+    font-size: 14px; /* Reducido */
     color: #666;
 }
 
@@ -61,11 +58,20 @@ body {
 
 h1 {
     color: #000000;
-    font-size: 2em;
+    font-size: 1.5em; /* Reducido */
 }
 
 button {
     width: 100%;
-    font-size: 1em;
-    padding: 10px;
+    font-size: 0.9em; /* Reducido */
+    padding: 10px; /* Reducido */
+}
+
+.button-group {
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.button-group .btn {
+    width: 48%;
 }

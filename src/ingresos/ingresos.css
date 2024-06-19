@@ -33,6 +33,14 @@
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
+  display: flex; /* Añadido */
+  justify-content: space-between; /* Añadido */
+  align-items: center; /* Añadido */
+}
+
+.ingreso-details {
+  text-align: center; /* Añadido */
+  flex: 1; /* Añadido */
 }
 
 .grafica {
@@ -43,7 +51,8 @@
 
 .delete-ingreso-button {
   color: #6c757d;
-  width: 20%;
+  margin-right: 5%; /* Añadido */
+  width: 10%;
 }
 
 .delete-ingreso-button:hover {

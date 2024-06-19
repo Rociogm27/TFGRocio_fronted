@@ -75,7 +75,7 @@ const NuevoIngreso = () => {
     <div className="nuevoIngreso-container">
       <NavbarPer idUser={idUser} />
       <div className="nuevoIngreso-box">
-        <h1>Crear Nuevo Ingreso</h1>
+        <h1><b>Crear Nuevo Ingreso</b></h1>
         <form className="nuevoIngreso-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="descripcion">Descripción</label>

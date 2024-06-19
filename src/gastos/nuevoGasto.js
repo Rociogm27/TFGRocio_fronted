@@ -81,7 +81,7 @@ const NuevoGasto = () => {
     <div className="nuevoGasto-container">
       <NavbarPer idUser={idUser} />
       <div className="nuevoGasto-box">
-        <h1>Crear Nuevo Gasto</h1>
+        <h1><b>Crear Nuevo Gasto</b></h1>
         <form className="nuevoGasto-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="descripcion">Descripción</label>

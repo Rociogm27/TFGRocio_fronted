@@ -22,9 +22,20 @@ function PaginaPrincipal() {
   const [mostrarGastos, setMostrarGastos] = useState(true);
 
   useEffect(() => {
+    // Verificar la presencia del token en localStorage
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/');
+      return;
+    }
+
     const fetchCuentas = async () => {
       try {
-        const response = await axios.get(URICuentasUser + idUser);
+        const response = await axios.get(URICuentasUser + idUser, {
+          headers: {
+            'auth-token': token
+          }
+        });
         const cuentasData = response.data;
         setCuentas(cuentasData);
 
@@ -39,15 +50,20 @@ function PaginaPrincipal() {
       }
     };
     fetchCuentas();
-  }, [idUser]);
+  }, [idUser, navigate]);
 
   useEffect(() => {
     const fetchCuentaDetalles = async () => {
       if (selectedCuentaId) {
         try {
-          const response = await axios.get(URICuentaDetalle + selectedCuentaId);
+          const token = localStorage.getItem('token');
+          const response = await axios.get(URICuentaDetalle + selectedCuentaId, {
+            headers: {
+              'auth-token': token
+            }
+          });
           setSelectedCuentaNombre(response.data.nombre);
-          setSaldoActual(response.data.saldo_actual); // Obtener el saldo actual
+          setSaldoActual(response.data.saldo_actual);
         } catch (error) {
           console.error(error);
         }
@@ -65,21 +81,14 @@ function PaginaPrincipal() {
     navigate(`/${idUser}/nuevaCuenta`);
   };
 
-/*
-boton del select anterior
-                  title={selectedCuentaNombre ? `Cuenta: ${selectedCuentaNombre}` : "Seleccionar cuenta"}
-
-*/
-
   return (
     <div>
-       <div className="row">
+      <div className="row">
         <div className="col-12">
           <NavbarPer className="navbar-per" idUser={idUser} />
-          </div>
-          </div>
-        <Container  fluid className="pagina-principal ">
-       
+        </div>
+      </div>
+      <Container fluid className="pagina-principal">
         {cuentas.length === 0 ? (
           <Row className="justify-content-center mt-5">
             <Col md={12} className="text-center">
@@ -94,8 +103,8 @@ boton del select anterior
                 <DropdownButton
                   id="dropdown-basic-button"
                   title={selectedCuentaNombre ? `Cambiar cuenta` : "Seleccionar cuenta"}
-                  variant="success" // Cambiar el variant a 'success'
-                  className="custom-dropdown" // Añadir clase personalizada
+                  variant="success"
+                  className="custom-dropdown"
                 >
                   {cuentas.map((cuenta) => (
                     <Dropdown.Item
@@ -110,12 +119,11 @@ boton del select anterior
 
               <Col xs={6} md={3} className="text-center">
                 <h4>{selectedCuentaId ? `Cuenta: ${selectedCuentaNombre}` : 'Seleccione una cuenta'}</h4>
-                <h5>{selectedCuentaId ? `Saldo: ${saldoActual}€` : ''}</h5> {/* Mostrar saldo actual */}
+                <h5>{selectedCuentaId ? `Saldo: ${saldoActual}€` : ''}</h5>
               </Col>
-
               <Col xs={6} md={3} className="text-center mb-2">
                 <Button
-                  variant={mostrarGastos ? "success" : "outline-secondary"}
+                  variant={mostrarGastos ? "success" : "light"}
                   className={`w-100 ${mostrarGastos ? 'activo' : ''}`}
                   onClick={() => setMostrarGastos(true)}
                 >
@@ -124,7 +132,7 @@ boton del select anterior
               </Col>
               <Col xs={6} md={3} className="text-center mb-2">
                 <Button
-                  variant={!mostrarGastos ? "success" : "outline-secondary"}
+                  variant={!mostrarGastos ? "success" : "light"}
                   className={`w-100 ${!mostrarGastos ? 'activo' : ''}`}
                   onClick={() => setMostrarGastos(false)}
                 >
@@ -132,11 +140,8 @@ boton del select anterior
                 </Button>
               </Col>
             </Row>
-            <span className="flex items-center">
-            <span className="h-px flex-1 bg-black"></span>
-            <span className="shrink-0 px-6">__________________________________________________________________________________________________________________________________________________________</span>
-            <span className="h-px flex-1 bg-black"></span>
-            </span>
+            <div class="linea"></div>
+
             <Row className="justify-content-center mt-3 mb-5">
               <Col xs={12}>
                 <div className="detalle">
@@ -147,7 +152,6 @@ boton del select anterior
           </>
         )}
       </Container>
-
     </div>
   );
 }

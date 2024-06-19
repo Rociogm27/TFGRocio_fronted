@@ -12,7 +12,12 @@ function NavbarPersonalizado(props) {
     useEffect(() => {
         const fetchEmail = async () => {
             try {
-                const response = await axios.get(`${URIUsuario}${props.idUser}`);
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`${URIUsuario}${props.idUser}`, {
+                    headers: {
+                    'auth-token': token
+                    }
+                  });
                 setEmail(response.data.email);
             } catch (error) {
                 console.error('Error fetching user email:', error);

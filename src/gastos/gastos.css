@@ -13,7 +13,6 @@
   padding: 12px;
   line-height: 1;
   width: 10%;
-
 }
 
 .gastos-content {
@@ -26,6 +25,7 @@
 .gastos-list {
   flex: 1;
   margin-right: 20px;
+  
 }
 
 .gasto {
@@ -34,6 +34,15 @@
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
+  display: flex; /* Añadido */
+  justify-content: space-between; /* Añadido */
+  align-items: center; /* Añadido */
+}
+
+.gasto-details {
+  text-align: center; /* Añadido */
+  flex: 1; /* Añadido */
+  
 }
 
 .grafica {
@@ -41,9 +50,11 @@
   display: flex;
   justify-content: center;
 }
+
 .delete-gasto-button {
   color: #6c757d;
-  width: 20%;
+  margin-right: 5%; /* Añadido */
+  width: 10%;
 }
 
 .delete-gasto-button:hover {
