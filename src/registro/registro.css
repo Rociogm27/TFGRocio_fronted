@@ -1,18 +1,15 @@
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #56ab2f, #a8e063);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content:right;
+    align-items:flex-start;
     height: 100vh;
   }
   
   .registro-container {
-    display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    display: flex;
+    height: 60%;
     width: 100%;
   }
   

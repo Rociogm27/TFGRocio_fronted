@@ -15,6 +15,11 @@ const NuevaCuenta = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
+  // Función para obtener el token desde localStorage
+  const getAuthToken = () => {
+    return localStorage.getItem('token');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -25,8 +30,14 @@ const NuevaCuenta = () => {
         return;
       }
 
+      const token = getAuthToken(); // Recuperar el token
+
       // Verificar si el usuario ya tiene una cuenta con el mismo nombre
-      const response = await axios.get(`${URICuentasUser}${idUser}`);
+      const response = await axios.get(`${URICuentasUser}${idUser}`, {
+        headers: {
+          'auth-token': token // Pasar el token en la cabecera
+        }
+      });
       const cuentas = response.data;
       const cuentaExistente = cuentas.find((cuenta) => cuenta.nombre === nombre);
 
@@ -44,7 +55,12 @@ const NuevaCuenta = () => {
         saldo_actual: saldo
       };
 
-      await axios.post(URICrearCuenta, nuevaCuenta);
+      await axios.post(URICrearCuenta, nuevaCuenta, {
+        headers: {
+          'auth-token': token // Pasar el token en la cabecera
+        }
+      });
+      
       setSuccess('Cuenta creada con éxito.');
       setError(null);
       setNombre('');
@@ -63,7 +79,7 @@ const NuevaCuenta = () => {
       <div className="nuevaCuenta-box">
         <h1>Crear Nueva Cuenta</h1>
         
-        <div class="linea"></div>
+        <div className="linea"></div>
 
         <form className="nuevaCuenta-form" onSubmit={handleSubmit}>
           <div className="form-group">

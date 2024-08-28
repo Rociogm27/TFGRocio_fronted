@@ -12,6 +12,7 @@ body {
     width: 100%;
     margin-bottom: 1%;
     margin-top: 1%;
+    display:inline;
 }
 
 .perfil-box {
@@ -21,17 +22,17 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 90%;
+    margin-top: 1%;
     max-width: 350px; /* Reducido */
 }
 
 .perfil-info {
-    margin-top: 10px; /* Reducido */
 }
 
 .perfil-card {
     background-color: #ffffff;
     border: none;
-    margin-bottom: 15px; /* Reducido */
+    margin-bottom: 8px; /* Reducido */
     width: 100%;
 }
 
@@ -42,7 +43,7 @@ body {
 }
 
 .perfil-card-text {
-    font-size: 14px; /* Reducido */
+    font-size: 12px; /* Reducido */
     color: #666;
 }
 
@@ -58,13 +59,13 @@ body {
 
 h1 {
     color: #000000;
-    font-size: 1.5em; /* Reducido */
+    font-size: 1.3em; /* Reducido */
 }
 
 button {
     width: 100%;
     font-size: 0.9em; /* Reducido */
-    padding: 10px; /* Reducido */
+    padding: 6px; /* Reducido */
 }
 
 .button-group {
@@ -75,3 +76,14 @@ button {
 .button-group .btn {
     width: 48%;
 }
+
+.btn-custom {
+    background-color: #4CAF50; /* Color personalizado */
+    color: white; /* Color del texto */
+    border: none; /* Remueve el borde si lo deseas */
+  }
+  
+  .btn-custom:hover {
+    background-color: #239021; /* Color al pasar el cursor */
+    color: rgb(255, 255, 255);
+  }

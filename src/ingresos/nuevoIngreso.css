@@ -77,5 +77,15 @@ body {
 
 h1 {
     color: #000000;
-    font-size: 20px;
+    font-size: 30px;
 }
+
+
+.saldo-actual {
+    width: 300px;
+    height: 300px;
+    position:relative;
+    left: 5%;
+    top:17%;
+    bottom: 0%;
+  }

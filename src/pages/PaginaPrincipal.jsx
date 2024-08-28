@@ -29,6 +29,7 @@ function PaginaPrincipal() {
       return;
     }
 
+
     const fetchCuentas = async () => {
       try {
         const response = await axios.get(URICuentasUser + idUser, {
@@ -124,7 +125,7 @@ function PaginaPrincipal() {
               <Col xs={6} md={3} className="text-center mb-2">
                 <Button
                   variant={mostrarGastos ? "success" : "light"}
-                  className={`w-100 ${mostrarGastos ? 'activo' : ''}`}
+                  className={`w-100 ${mostrarGastos ? 'activo' : 'clarito'}`}
                   onClick={() => setMostrarGastos(true)}
                 >
                   Gastos
@@ -133,7 +134,7 @@ function PaginaPrincipal() {
               <Col xs={6} md={3} className="text-center mb-2">
                 <Button
                   variant={!mostrarGastos ? "success" : "light"}
-                  className={`w-100 ${!mostrarGastos ? 'activo' : ''}`}
+                  className={`w-100 ${!mostrarGastos ? 'activo' : 'clarito'}`}
                   onClick={() => setMostrarGastos(false)}
                 >
                   Ingresos

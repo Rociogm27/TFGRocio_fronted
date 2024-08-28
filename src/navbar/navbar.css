@@ -32,3 +32,16 @@ body {
     font-size: 1.2rem;
     color: #000000;
 }
+
+.nav-info-icon {
+    padding: 0; /* Eliminar padding para evitar que el botón sea más grande de lo necesario */
+    line-height: 1; /* Ajustar la altura de línea */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-info-icon svg {
+    width: 16px; /* Asegúrate de que el icono mantenga un tamaño pequeño */
+    height: 16px;
+}

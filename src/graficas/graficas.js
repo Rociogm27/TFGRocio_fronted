@@ -5,19 +5,21 @@ import { Container, Row, Col, Dropdown, DropdownButton } from 'react-bootstrap';
 import NavbarPer from "../navbar/navbar.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'c3/c3.css';
-import * as d3 from 'd3';
 import c3 from 'c3';
 import './graficas.css'; // Importar el CSS personalizado
 
 const URICuentasUser = 'http://localhost:8000/cuentas/user/';
 const URIGastosCuenta = 'http://localhost:8000/gastos/cuenta/';
 const URIIngresosCuenta = 'http://localhost:8000/ingresos/cuenta/';
+const URICuentaDetalle = 'http://localhost:8000/cuentas/';
 
 const Graficos = () => {
+
     const { idUser } = useParams();
     const [cuentas, setCuentas] = useState([]);
     const [selectedCuentaId, setSelectedCuentaId] = useState(null);
     const [selectedCuentaNombre, setSelectedCuentaNombre] = useState('');
+    const [saldoActual, setSaldoActual] = useState(null); // Estado para el saldo actual
     const [filtro, setFiltro] = useState('dia'); // Filtro puesto por defecto
     const [gastos, setGastos] = useState([]);
     const [ingresos, setIngresos] = useState([]);
@@ -25,14 +27,21 @@ const Graficos = () => {
 
     useEffect(() => {
         const fetchCuentas = async () => {
+            const token = localStorage.getItem('token');
+
             try {
-                const response = await axios.get(`${URICuentasUser}${idUser}`);
+                const response = await axios.get(`${URICuentasUser}${idUser}`, {
+                    headers: {
+                      'auth-token': token // Pasar el token en la cabecera
+                    }
+                });
                 const cuentasData = response.data;
                 setCuentas(cuentasData);
                 if (cuentasData.length > 0) {
                     const primeraCuenta = cuentasData[0];
                     setSelectedCuentaId(primeraCuenta.id);
                     setSelectedCuentaNombre(primeraCuenta.nombre);
+                    fetchSaldoActual(primeraCuenta.id); // Obtener el saldo actual de la cuenta seleccionada
                 }
             } catch (error) {
                 console.error('Error fetching cuentas:', error);
@@ -47,10 +56,34 @@ const Graficos = () => {
         }
     }, [selectedCuentaId, filtro]);
 
-    const fetchGastosEIngresos = async (cuentaId, filtro) => {
+    const fetchSaldoActual = async (cuentaId) => {
+        const token = localStorage.getItem('token');
         try {
-            const gastosResponse = await axios.get(`${URIGastosCuenta}${cuentaId}`);
-            const ingresosResponse = await axios.get(`${URIIngresosCuenta}${cuentaId}`);
+            const response = await axios.get(`${URICuentaDetalle}${cuentaId}`, {
+                headers: {
+                    'auth-token': token // Pasar el token en la cabecera
+                }
+            });
+            setSaldoActual(response.data.saldo_actual);
+        } catch (error) {
+            console.error('Error fetching saldo:', error);
+        }
+    };
+
+    const fetchGastosEIngresos = async (cuentaId, filtro) => {
+        const token = localStorage.getItem('token');
+
+        try {
+            const gastosResponse = await axios.get(`${URIGastosCuenta}${cuentaId}`, {
+                headers: {
+                  'auth-token': token // Pasar el token en la cabecera
+                }
+            });
+            const ingresosResponse = await axios.get(`${URIIngresosCuenta}${cuentaId}`, {
+                headers: {
+                  'auth-token': token // Pasar el token en la cabecera
+                }
+            });
             const filteredGastos = filterByDate(gastosResponse.data, filtro);
             const filteredIngresos = filterByDate(ingresosResponse.data, filtro);
             setGastos(filteredGastos);
@@ -77,7 +110,7 @@ const Graficos = () => {
                     return itemDate >= startOfWeek;
                 case 'mes':
                     return itemDate.getMonth() === now.getMonth() && itemDate.getFullYear() === now.getFullYear();
-                case 'ano':
+                case 'anual':
                     return itemDate.getFullYear() === now.getFullYear();
                 default:
                     return false;
@@ -112,6 +145,7 @@ const Graficos = () => {
     const handleCuentaChange = (cuentaId, cuentaNombre) => {
         setSelectedCuentaId(cuentaId);
         setSelectedCuentaNombre(cuentaNombre);
+        fetchSaldoActual(cuentaId); // Actualizar el saldo cuando cambia la cuenta
     };
 
     const handleFiltroChange = (filtro) => {
@@ -131,7 +165,7 @@ const Graficos = () => {
                 Ingresos: 'bar'
             },
             colors: {
-                Gastos: '#FFBB28',
+                Gastos: '#8e2323',
                 Ingresos: '#4CAF50'
             }
         };
@@ -173,7 +207,9 @@ const Graficos = () => {
         <div>
             <NavbarPer idUser={idUser} />
             <Container fluid className="pagina-graficos mt-2">
-        <h1>Gráficos</h1>
+                <Row>
+                        <h2>Gráficos</h2>
+                </Row>
                 <Container className="contenido-graficos p-4 shadow-lg">
                     <Row className="align-items-center cuenta-select">
                         <Col xs={12} md={4} className="d-flex justify-content-start align-items-center">
@@ -196,6 +232,7 @@ const Graficos = () => {
 
                         <Col xs={12} md={4} className="text-center">
                             <h4>Cuenta: {selectedCuentaNombre}</h4>
+                            {saldoActual !== null && <h5>Saldo Actual: {saldoActual}€</h5>} 
                         </Col>
 
                         <Col xs={6} md={4} className="text-center">
@@ -208,7 +245,7 @@ const Graficos = () => {
                                 <Dropdown.Item onClick={() => handleFiltroChange('dia')}>Día</Dropdown.Item>
                                 <Dropdown.Item onClick={() => handleFiltroChange('semana')}>Semana</Dropdown.Item>
                                 <Dropdown.Item onClick={() => handleFiltroChange('mes')}>Mes</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handleFiltroChange('ano')}>Año</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleFiltroChange('anual')}>Anual</Dropdown.Item>
                             </DropdownButton>
                         </Col>
                     </Row>

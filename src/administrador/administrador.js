@@ -15,8 +15,15 @@ const Administradores = () => {
   useEffect(() => {
     // Obtener la lista de usuarios y el email del administrador actual
     const fetchUsuarios = async () => {
+      
       try {
-        const response = await axios.get(URIuser);
+        const token = localStorage.getItem('token');
+
+        const response = await axios.get(URIuser, {
+          headers: {
+            'auth-token': token // Pasar el token en la cabecera
+          }
+        });
         const adminUser = response.data.find(user => user.id === parseInt(idUser));
         setAdminEmail(adminUser.email);
         setUsuarios(response.data);
@@ -29,11 +36,17 @@ const Administradores = () => {
   }, [idUser]);
 
   const handleAdminChange = async (id, isAdmin) => {
+    const token = localStorage.getItem('token');
+
     try {
       const updatedUser = {
         admin: isAdmin ? 1 : 0
       };
-      await axios.put(`${URIupdateUser}${id}`, updatedUser);
+      await axios.put(`${URIupdateUser}${id}`, updatedUser, {
+        headers: {
+          'auth-token': token // Pasar el token en la cabecera
+        }
+      });
       setUsuarios(usuarios.map(user => user.id === id ? { ...user, admin: isAdmin ? 1 : 0 } : user));
     } catch (error) {
       console.error('Error updating user:', error);

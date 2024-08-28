@@ -17,6 +17,7 @@ const CompRegistro = () => {
 
   async function registro(e) {
     e.preventDefault();
+    
     try {
         const res = await axios.get(URIuser);
         let users = res.data;
@@ -127,4 +128,4 @@ const CompRegistro = () => {
   );
 };
 
-export default CompRegistro;
+export default CompRegistro;  

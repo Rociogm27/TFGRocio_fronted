@@ -52,9 +52,14 @@ const Notificiones = () => {
   const handleDeleteNotificacion = async () => {
     try {
       if (!notificacionToDelete) return;
+      const token = localStorage.getItem('token');
 
       // Borrar la notificación
-      await axios.delete(`${URINotificacion}${notificacionToDelete.id}`);
+      await axios.delete(`${URINotificacion}${notificacionToDelete.id}`, {
+        headers: {
+          'auth-token': token
+        }
+      });
 
       // Actualizar la lista de notificaciones
       setNotificaciones(notificaciones.filter(notificacion => notificacion.id !== notificacionToDelete.id));

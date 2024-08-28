@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, OverlayTrigger, Popover, Button } from 'react-bootstrap';
+import { FaInfoCircle } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './navbar.css'; // Importar el CSS personalizado
 
@@ -17,7 +18,7 @@ function NavbarPersonalizado(props) {
                     headers: {
                     'auth-token': token
                     }
-                  });
+                });
                 setEmail(response.data.email);
             } catch (error) {
                 console.error('Error fetching user email:', error);
@@ -25,6 +26,15 @@ function NavbarPersonalizado(props) {
         };
         fetchEmail();
     }, [props.idUser]);
+
+    const popover = (
+        <Popover id="popover-basic">
+            <Popover.Header as="h3">Información del Sistema</Popover.Header>
+            <Popover.Body>
+                <strong>Gestor de Gastos:</strong> Esta aplicación permite gestionar tus finanzas personales, crear y editar cuentas, registrar gastos e ingresos, visualizar gráficos financieros y recibir notificaciones personalizadas. Accede a las distintas secciones para explorar más funciones.
+            </Popover.Body>
+        </Popover>
+    );
 
     return (
         <Navbar className="navbar-personalizado" expand="lg" fixed="top">
@@ -42,7 +52,7 @@ function NavbarPersonalizado(props) {
                 </Nav>
                 <Nav>
                     <span className="navbar-text me-5">{email}</span>
-                    <Nav.Link href={`/${props.idUser}/perfil`} className='navbar-perfil me-3'>Mi Perfil</Nav.Link>
+                    <Nav.Link href={`/${props.idUser}/perfil`} className='navbar-perfil me-2'>Mi Perfil</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

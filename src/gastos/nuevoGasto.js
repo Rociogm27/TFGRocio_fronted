@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavbarPer from "../navbar/navbar.js";
 import './nuevoGasto.css'; // Archivo CSS para estilos personalizados
@@ -15,8 +15,34 @@ const NuevoGasto = () => {
   const [fecha, setFecha] = useState('');
   const [categoria, setCategoria] = useState('');
   const [esFijo, setEsFijo] = useState(false);
+  const [saldoActual, setSaldoActual] = useState(null); // Estado para el saldo actual
+  const [nombreCuenta, setNombreCuenta] = useState(''); // Estado para el nombre de la cuenta
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+
+  // Función para obtener el token desde localStorage
+  const getAuthToken = () => {
+    return localStorage.getItem('token');
+  };
+
+  useEffect(() => {
+    const fetchSaldoActual = async () => {
+      try {
+        const token = getAuthToken(); // Recuperar el token
+        const response = await axios.get(`${URICuentaDetalle}${idCuenta}`, {
+          headers: {
+            'auth-token': token // Pasar el token en la cabecera
+          }
+        });
+        setSaldoActual(response.data.saldo_actual);
+        setNombreCuenta(response.data.nombre); // Guardar el nombre de la cuenta
+      } catch (error) {
+        console.error('Error fetching saldo:', error);
+      }
+    };
+
+    fetchSaldoActual();
+  }, [idCuenta]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,8 +54,14 @@ const NuevoGasto = () => {
         return;
       }
 
+      const token = getAuthToken(); // Recuperar el token
+
       // Obtener detalles de la cuenta
-      const responseCuenta = await axios.get(`${URICuentaDetalle}${idCuenta}`);
+      const responseCuenta = await axios.get(`${URICuentaDetalle}${idCuenta}`, {
+        headers: {
+          'auth-token': token // Pasar el token en la cabecera
+        }
+      });
       const cuenta = responseCuenta.data;
 
       // Verificar si el saldo es suficiente
@@ -51,7 +83,11 @@ const NuevoGasto = () => {
 
       console.log(nuevoGasto);
 
-      await axios.post(URICrearGasto, nuevoGasto);
+      await axios.post(URICrearGasto, nuevoGasto, {
+        headers: {
+          'auth-token': token // Pasar el token en la cabecera
+        }
+      });
 
       // Actualizar saldo_actual
       const nuevoSaldo = parseFloat(cuenta.saldo_actual) - parseFloat(cantidad);
@@ -60,7 +96,11 @@ const NuevoGasto = () => {
         saldo_actual: nuevoSaldo
       };
 
-      await axios.put(`${URICuentaDetalle}${idCuenta}`, cuentaActualizada);
+      await axios.put(`${URICuentaDetalle}${idCuenta}`, cuentaActualizada, {
+        headers: {
+          'auth-token': token // Pasar el token en la cabecera
+        }
+      });
 
       setSuccess('Gasto creado con éxito.');
       setError(null);
@@ -77,9 +117,15 @@ const NuevoGasto = () => {
     }
   };
 
+  const today = new Date().toISOString().split("T")[0];
+
   return (
     <div className="nuevoGasto-container">
       <NavbarPer idUser={idUser} />
+      <div className="saldo-actual">
+      <h3><b>Cuenta:</b> {nombreCuenta}</h3> {/* Mostrar el nombre de la cuenta */}
+      <h3><b>Saldo Actual:</b> {saldoActual}€</h3>
+      </div>
       <div className="nuevoGasto-box">
         <h1><b>Crear Nuevo Gasto</b></h1>
         <form className="nuevoGasto-form" onSubmit={handleSubmit}>
@@ -113,6 +159,7 @@ const NuevoGasto = () => {
               <option value="Alimentación">Alimentación</option>
               <option value="Transporte">Transporte</option>
               <option value="Familia">Familia</option>
+              <option value="Coche">Coche</option>
               <option value="Otros">Otros</option>
             </select>
           </div>
@@ -133,6 +180,7 @@ const NuevoGasto = () => {
               name="fecha"
               value={fecha}
               onChange={(e) => setFecha(e.target.value)}
+              max={today} // Restringe la selección de fechas futuras
               type="date"
               className="form-control"
               required

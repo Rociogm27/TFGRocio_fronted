@@ -186,7 +186,7 @@ const Perfil = () => {
               </>
             ) : (
               <>
-                <Button variant="primary" onClick={handleEdit} className="btn mb-2">Editar Perfil</Button>
+                <Button variant="custom" onClick={handleEdit} className="btn custom mb-2">Editar Perfil</Button>
                 <Button variant="danger" onClick={handleCerrarSesion} className="btn mb-2">Cerrar Sesión</Button>
               </>
             )}

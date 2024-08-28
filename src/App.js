@@ -1,6 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-
+import { BrowserRouter, Route, Routes, Navigate, useParams } from "react-router-dom";
 import Login from "./login/login";
 import Registro from "./registro/registro";
 import PagesPrincipal from "./pages/PaginaPrincipal";
@@ -17,8 +16,21 @@ import Sugerencias from './sugerencias/sugerencias'
 // Componente para rutas protegidas
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/" />;
+  const usuariologueado = localStorage.getItem('idUser');
+  const { idUser } = useParams();  // Obtiene el idUser de la URL
+
+  // Si no hay token, redirigir a la página de inicio
+  if (!token) {
+    return <Navigate to="/" />;
+  }
+  // Si hay token pero el idUser no coincide, redirigir a la página del usuario logueado
+  if (idUser !== usuariologueado) {
+    return <Navigate to={`/${usuariologueado}`} />;
+  }
+  // Si todo está bien, renderizar el componente hijo
+  return children;
 };
+
 
 function App() {
   return (
@@ -43,5 +55,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
